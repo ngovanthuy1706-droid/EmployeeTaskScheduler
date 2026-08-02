@@ -1,0 +1,19 @@
+<table border="1">
+    <tr>
+        <th>Công việc</th>
+        <th>Hành động</th>
+    </tr>
+
+    {% for job in jobs %}
+    <tr>
+        <td>{{ job }}</td>
+        <td>
+            <a href="/delete_job/{{ loop.index0 }}"
+               onclick="return confirm('Xoá công việc này?')"
+               style="color:red;">
+               ❌ Xoá
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

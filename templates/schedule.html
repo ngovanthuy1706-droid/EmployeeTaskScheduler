@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Phân công</h2>
+
+<form method="post">
+    <select name="employee">
+        {% for e in employees %}
+        <option>{{ e.name }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="task">
+        {% for t in tasks %}
+        <option>{{ t.name }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="date" name="day">
+    <button type="submit">Lưu</button>
+</form>
+
+<hr>
+
+<table border="1" width="100%">
+    <tr>
+        <th>Nhân viên</th>
+        <th>Công việc</th>
+        <th>Ngày</th>
+        <th>Xóa</th>
+    </tr>
+
+    {% for s in schedules %}
+    <tr>
+        <td>{{ s.employee }}</td>
+        <td>{{ s.task }}</td>
+        <td>{{ s.day }}</td>
+        <td>
+            <a href="/delete_schedule/{{ loop.index0 }}">
+                <button>Xóa</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

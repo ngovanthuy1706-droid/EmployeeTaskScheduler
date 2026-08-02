@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Web Excel - phan_cong.xlsx{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-2xl border shadow-sm overflow-hidden space-y-4">
+    <div class="bg-emerald-700 text-white p-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-file-excel text-2xl"></i>
+            <div>
+                <h3 class="font-bold text-base leading-tight">phan_cong.xlsx - Web Excel Viewer</h3>
+                <p class="text-[11px] text-emerald-200">Đã tự động lưu dữ liệu từ ứng dụng Task Scheduler</p>
+            </div>
+        </div>
+        <a href="{{ url_for('dashboard') }}" class="bg-white text-emerald-800 font-semibold text-xs px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">
+            &larr; Quay lại Dashboard
+        </a>
+    </div>
+
+    <!-- Web Excel Table Format -->
+    <div class="p-4 overflow-x-auto">
+        <table class="w-full border-collapse text-xs font-sans border border-gray-300">
+            <thead>
+                <tr class="bg-gray-200 text-gray-500 text-center text-[10px] border-b border-gray-300">
+                    <th class="w-10 border-r border-gray-300 p-1 bg-gray-300">#</th>
+                    <th class="border-r border-gray-300 p-1">A</th>
+                    <th class="border-r border-gray-300 p-1">B</th>
+                    <th class="border-r border-gray-300 p-1">C</th>
+                    <th class="border-r border-gray-300 p-1">D</th>
+                </tr>
+                <tr class="bg-emerald-600 text-white font-bold text-center">
+                    <td class="p-2.5 border-r border-gray-300 bg-gray-200 text-gray-600 font-mono">1</td>
+                    <td class="p-2.5 border-r border-gray-300">Nhân viên</td>
+                    <td class="p-2.5 border-r border-gray-300">Ca làm</td>
+                    <td class="p-2.5 border-r border-gray-300">Công việc</td>
+                    <td class="p-2.5 border-r border-gray-300">Ngày làm</td>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+                {% for row in excel_data %}
+                <tr class="hover:bg-emerald-50/60 transition">
+                    <td class="p-2 text-center bg-gray-100 font-mono text-gray-500 border-r border-gray-300 font-medium">
+                        {{ loop.index + 1 }}
+                    </td>
+                    <td class="p-2.5 border-r border-gray-200 font-semibold text-gray-800">
+                        {{ row.get('Nhân viên') or row.get('emp_name') }}
+                    </td>
+                    <td class="p-2.5 border-r border-gray-200 text-center">
+                        <span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200 font-medium text-[11px]">
+                            {{ row.get('Ca làm') or row.get('shift') }}
+                        </span>
+                    </td>
+                    <td class="p-2.5 border-r border-gray-200 text-emerald-700 font-medium">
+                        {{ row.get('Công việc') or row.get('task_name') }}
+                    </td>
+                    <td class="p-2.5 border-r border-gray-200 text-center font-mono text-gray-600">
+                        {{ row.get('Ngày làm') or row.get('date') }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="p-8 text-center text-gray-400">Chưa có dữ liệu nào trong Excel.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

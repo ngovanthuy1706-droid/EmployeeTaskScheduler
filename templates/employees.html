@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}Quản lý Nhân viên{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- KHỐI QUÉT FILE EXCEL NHÂN VIÊN -->
+    <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b pb-3">
+            <h3 class="text-sm font-bold text-gray-800 flex items-center gap-2">
+                <i class="fa-solid fa-file-excel text-emerald-600 text-lg"></i>
+                <span>Nhập Danh Sách Nhân Viên Từ File Excel</span>
+            </h3>
+            <span class="text-xs text-gray-400">Chọn file Excel (.xlsx) để cập nhật nhanh</span>
+        </div>
+
+        <form action="{{ url_for('upload_employees_excel') }}" method="POST" enctype="multipart/form-data" class="flex items-center gap-4">
+            <div class="flex-1 border-2 border-dashed border-emerald-200 hover:border-emerald-500 bg-emerald-50/40 rounded-xl p-3 flex items-center gap-3 transition">
+                <i class="fa-solid fa-file-csv text-2xl text-emerald-600"></i>
+                <input type="file" name="excel_file" accept=".xlsx, .xls" required
+                       class="w-full text-xs text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 cursor-pointer">
+            </div>
+
+            <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-3 rounded-xl transition shadow-sm flex items-center gap-2 text-xs shrink-0">
+                <i class="fa-solid fa-rotate text-sm"></i> Cập nhật Danh sách
+            </button>
+        </form>
+
+        <div class="text-[11px] text-gray-500 bg-gray-50 p-2.5 rounded-lg border flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-emerald-600"></i>
+            <span>Các cột tiêu đề Excel mẫu: <b>Tên</b> (hoặc Họ tên), <b>Công việc</b>, <b>Mức lương</b> (không bắt buộc)</span>
+        </div>
+    </div>
+
+    <!-- BẢNG DANH SÁCH NHÂN VIÊN -->
+    <div class="bg-white rounded-2xl border shadow-sm overflow-hidden space-y-4">
+        <div class="p-4 border-b bg-gray-50 flex justify-between items-center">
+            <h3 class="font-bold text-gray-800 text-sm">Danh sách nhân viên ({{ employees|length }})</h3>
+        </div>
+
+        <div class="overflow-x-auto p-4">
+            <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                    <tr class="bg-blue-600 text-white font-semibold">
+                        <th class="p-3.5 rounded-l-lg text-center w-20">Hình ảnh</th>
+                        <th class="p-3.5">Tên</th>
+                        <th class="p-3.5">Công việc</th>
+                        <th class="p-3.5 rounded-r-lg text-center w-28">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    {% for e in employees %}
+                    <tr class="hover:bg-gray-50/80 transition">
+                        <td class="p-3 text-center">
+                            <img src="{{ e.image }}" alt="{{ e.name }}" class="w-10 h-10 rounded-full object-cover mx-auto border shadow-sm">
+                        </td>
+                        <td class="p-3.5 font-bold text-gray-800 text-sm">{{ e.name }}</td>
+                        <td class="p-3.5 font-semibold text-emerald-600">
+                            <span class="bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                                {{ e.task if e.task else (e.role if e.role else 'Chưa phân công') }}
+                            </span>
+                        </td>
+                        <td class="p-3.5 text-center">
+                            <a href="{{ url_for('delete_employee', index=loop.index0) }}"
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')"
+                               class="bg-red-50 text-red-600 hover:bg-red-100 px-3 py-1.5 rounded-lg text-xs font-semibold transition inline-flex items-center gap-1">
+                                <i class="fa-solid fa-trash-can"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-gray-400">Chưa có nhân viên nào. Hãy chọn file Excel ở trên và nhấn Cập nhật!</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

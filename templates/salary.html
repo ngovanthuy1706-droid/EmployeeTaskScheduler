@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Quản lý Bảng lương{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-2xl border shadow-sm overflow-hidden space-y-4">
+    <!-- Header Bảng Lương -->
+    <div class="p-5 border-b flex justify-between items-center bg-gray-50">
+        <div>
+            <h3 class="font-bold text-gray-800 text-base flex items-center gap-2">
+                <i class="fa-solid fa-money-bill-wave text-emerald-600"></i> Quản Lý Bảng Lương Nhân Viên
+            </h3>
+            <p class="text-xs text-gray-500 mt-0.5">Điều chỉnh Mức lương và Phụ cấp, sau đó nhấn "Lưu" để cập nhật</p>
+        </div>
+        <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200">
+            Tháng 05/2025
+        </span>
+    </div>
+
+    <!-- Bảng Dữ Liệu Lương -->
+    <div class="overflow-x-auto p-4">
+        <table class="w-full text-left text-xs border-collapse">
+            <thead>
+                <tr class="bg-blue-600 text-white font-semibold">
+                    <th class="p-3.5 rounded-l-lg">Nhân viên</th>
+                    <th class="p-3.5">Chức vụ</th>
+                    <th class="p-3.5">Mức lương cơ bản (VNĐ)</th>
+                    <th class="p-3.5">Phụ cấp (VNĐ)</th>
+                    <th class="p-3.5">Thực nhận (VNĐ)</th>
+                    <th class="p-3.5 rounded-r-lg text-center">Hành động</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for e in employees %}
+                {% set base_sal = e.salary if e.salary is defined else 17500000 %}
+                {% set bonus_sal = e.bonus if e.bonus is defined else 1500000 %}
+                {% set total_sal = base_sal + bonus_sal %}
+                <tr class="hover:bg-gray-50/80 transition">
+                    <form action="{{ url_for('update_salary', index=loop.index0) }}" method="POST">
+                        <td class="p-3.5 font-bold text-gray-800 text-sm">
+                            {{ e.name }}
+                        </td>
+
+                        <td class="p-3.5 text-gray-600 font-medium">
+                            {{ e.role if e.role else 'Nhân viên' }}
+                        </td>
+                        
+                        <!-- Ô nhập Mức lương -->
+                        <td class="p-3.5">
+                            <input type="number" name="salary" value="{{ base_sal }}" step="500000" min="0" required
+                                   class="w-36 border border-gray-300 rounded-lg p-2 text-xs font-bold text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none">
+                        </td>
+
+                        <!-- Ô nhập Phụ cấp -->
+                        <td class="p-3.5">
+                            <input type="number" name="bonus" value="{{ bonus_sal }}" step="100000" min="0" required
+                                   class="w-32 border border-gray-300 rounded-lg p-2 text-xs font-bold text-emerald-600 focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </td>
+
+                        <!-- Thực nhận -->
+                        <td class="p-3.5 font-extrabold text-blue-600 text-sm">
+                            {{ total_sal }} VNĐ
+                        </td>
+
+                        <!-- Nút Lưu -->
+                        <td class="p-3.5 text-center">
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-1.5 rounded-lg font-semibold text-xs transition shadow-sm inline-flex items-center gap-1.5">
+                                <i class="fa-solid fa-floppy-disk"></i> Lưu
+                            </button>
+                        </td>
+                    </form>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="p-8 text-center text-gray-400">Chưa có dữ liệu nhân viên. Hãy thêm nhân viên ở mục "Nhân viên".</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

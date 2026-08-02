@@ -1,0 +1,66 @@
+[
+    {
+        "name": "anh",
+        "task": "1,2",
+        "role": "1,2",
+        "image": "Image of HOUSTON, TEXAS - JUNE 23: Cristiano Ronaldo of Portugal looks on during the FIFA World Cup 2026 Group K match between Portugal and Uzbekistan at Houston Stadium on June 23, 2026 in Houston, United States. (Photo by Sebastian Frej/Getty Images)",
+        "salary": 17500000,
+        "bonus": 1500000
+    },
+    {
+        "name": "thủy",
+        "task": "3",
+        "role": "3",
+        "image": "https://i.pravatar.cc/100?img=2",
+        "salary": 17500000,
+        "bonus": 1500000
+    },
+    {
+        "name": "nguyên",
+        "task": "6,9",
+        "role": "6,9",
+        "image": "https://i.pravatar.cc/100?img=4",
+        "salary": 17500000,
+        "bonus": 1500000
+    },
+    {
+        "name": "anh1",
+        "task": "7,8",
+        "role": "7,8",
+        "image": "https://i.pravatar.cc/100?img=5",
+        "salary": 17500000,
+        "bonus": 1500000
+    },
+    {
+        "name": "thủy1",
+        "task": "5",
+        "role": "5",
+        "image": "https://i.pravatar.cc/100?img=6",
+        "salary": 17500000,
+        "bonus": 1500000
+    },
+    {
+        "name": "tuấn1",
+        "task": "8",
+        "role": "8",
+        "image": "https://i.pravatar.cc/100?img=7",
+        "salary": 17500000,
+        "bonus": 1500000
+    },
+    {
+        "name": "nguyên1",
+        "task": "6",
+        "role": "6",
+        "image": "https://i.pravatar.cc/100?img=8",
+        "salary": 17500000,
+        "bonus": 1500000
+    },
+    {
+        "name": "anh2",
+        "task": "9",
+        "role": "9",
+        "image": "https://i.pravatar.cc/100?img=9",
+        "salary": 17500000,
+        "bonus": 1500000
+    }
+]

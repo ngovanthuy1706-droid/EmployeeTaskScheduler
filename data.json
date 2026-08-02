@@ -1,0 +1,53 @@
+{
+    "employees": [
+        {
+            "name": "ngô văn thuỷ"
+        },
+        {
+            "name": "quốc anh"
+        }
+    ],
+    "jobs": [
+        {
+            "name": "bảo trì"
+        }
+    ],
+    "schedule": [
+        {
+            "emp": "",
+            "job": "",
+            "shift": "Chiều",
+            "day": "Thứ 2"
+        },
+        {
+            "emp": "ngô văn thuỷ",
+            "job": "bảo trì",
+            "shift": "Ca 1 (7h-10h)",
+            "day": "Thứ 2"
+        },
+        {
+            "emp": "ngô văn thuỷ",
+            "job": "bảo trì",
+            "shift": "Ca 1 (7h-10h)",
+            "day": "Thứ 2"
+        },
+        {
+            "emp": "ngô văn thuỷ",
+            "job": "bảo trì",
+            "shift": "Ca 2 (13h-16h)",
+            "day": "Thứ 3"
+        },
+        {
+            "emp": "quốc anh",
+            "job": "bảo trì",
+            "shift": "Ca 2 (13h-16h)",
+            "day": "Thứ 7"
+        },
+        {
+            "emp": "ngô văn thuỷ",
+            "job": "bảo trì",
+            "shift": "Ca 2 (13h-16h)",
+            "day": "Thứ 7"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Cài đặt{% endblock %}
+{% block content %}
+<div class="bg-white p-6 rounded-2xl border shadow-sm max-w-md space-y-4">
+    <h3 class="font-bold text-gray-700">Tài khoản Quản trị</h3>
+    <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-xl text-xs font-semibold block text-center">Đăng xuất</a>
+</div>
+{% endblock %}

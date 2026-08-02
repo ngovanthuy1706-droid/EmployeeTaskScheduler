@@ -1,0 +1,56 @@
+[
+    {
+        "emp_name": "anh ",
+        "shift": "Sáng",
+        "date": "2026-07-27",
+        "task_name": "1,2"
+    },
+    {
+        "emp_name": "thủy",
+        "shift": "Chiều",
+        "date": "2026-07-28",
+        "task_name": "3"
+    },
+    {
+        "emp_name": "tuấn ",
+        "shift": "Sáng",
+        "date": "2026-07-30",
+        "task_name": "Làm việc"
+    },
+    {
+        "emp_name": "nguyên",
+        "shift": "Chiều",
+        "date": "2026-07-29",
+        "task_name": "6,9"
+    },
+    {
+        "emp_name": "anh1",
+        "shift": "Chiều",
+        "date": "2026-07-31",
+        "task_name": "7,8"
+    },
+    {
+        "emp_name": "thủy1 ",
+        "shift": "Chiều",
+        "date": "2026-08-01",
+        "task_name": "5"
+    },
+    {
+        "emp_name": "tuấn1",
+        "shift": "Sáng",
+        "date": "2026-08-03",
+        "task_name": "8"
+    },
+    {
+        "emp_name": "nguyên1",
+        "shift": "Sáng",
+        "date": "2026-08-02",
+        "task_name": "6"
+    },
+    {
+        "emp_name": "anh2",
+        "shift": "Chiều",
+        "date": "2026-08-03",
+        "task_name": "9"
+    }
+]

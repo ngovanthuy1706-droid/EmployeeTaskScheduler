@@ -1,0 +1,68 @@
+body {
+    margin:0;
+    font-family:Arial;
+    display:flex;
+}
+
+.sidebar {
+    width:220px;
+    background:#1e293b;
+    color:white;
+    height:100vh;
+    padding:20px;
+}
+
+.sidebar a {
+    display:block;
+    color:white;
+    padding:10px;
+    margin:5px 0;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.sidebar a:hover {
+    background:#3b82f6;
+}
+
+.main {
+    flex:1;
+    padding:20px;
+    background:#f1f5f9;
+}
+
+.card {
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    display:inline-block;
+    width:200px;
+    margin:10px;
+    text-align:center;
+}
+
+table {
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+}
+
+th {
+    background:#3b82f6;
+    color:white;
+}
+
+th, td {
+    padding:10px;
+    border:1px solid #ddd;
+}
+
+button {
+    padding:6px 10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.delete { background:red; color:white; }
+.edit { background:orange; color:white; }

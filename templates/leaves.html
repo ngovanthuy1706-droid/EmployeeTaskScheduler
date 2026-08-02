@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Quản lý Đơn xin nghỉ{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- FORM TẠO ĐƠN XIN NGHỈ -->
+    <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
+        <div class="flex items-center gap-2 text-blue-600 font-bold border-b pb-3 text-sm">
+            <i class="fa-solid fa-file-signature text-lg"></i>
+            <span>Tạo Đơn Xin Nghỉ / Nghỉ Phép</span>
+        </div>
+
+        <form action="{{ url_for('add_leave') }}" method="POST" class="grid grid-cols-4 gap-4 text-xs">
+            <div>
+                <label class="block font-medium text-gray-600 mb-1">Nhân viên nghỉ</label>
+                <select name="emp_name" class="w-full border rounded-lg p-2.5 bg-gray-50 outline-none">
+                    {% for e in employees %}
+                    <option value="{{ e.name }}">{{ e.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="block font-medium text-gray-600 mb-1">Từ ngày</label>
+                <input type="date" name="start_date" required class="w-full border rounded-lg p-2.5 bg-gray-50 outline-none">
+            </div>
+
+            <div>
+                <label class="block font-medium text-gray-600 mb-1">Đến ngày</label>
+                <input type="date" name="end_date" required class="w-full border rounded-lg p-2.5 bg-gray-50 outline-none">
+            </div>
+
+            <div>
+                <label class="block font-medium text-gray-600 mb-1">Lý do nghỉ</label>
+                <input type="text" name="reason" placeholder="VD: Nghỉ phép năm, việc gia đình..." required class="w-full border rounded-lg p-2.5 bg-gray-50 outline-none">
+            </div>
+
+            <div class="col-span-4 flex justify-end">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> Gửi Đơn Xin Nghỉ
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- BẢNG DANH SÁCH ĐƠN XIN NGHỈ -->
+    <div class="bg-white rounded-2xl border shadow-sm overflow-hidden space-y-4">
+        <div class="p-4 border-b bg-gray-50">
+            <h3 class="font-bold text-gray-800 text-sm">Danh sách đơn xin nghỉ ({{ leaves|length }})</h3>
+        </div>
+
+        <div class="overflow-x-auto p-4">
+            <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                    <tr class="bg-blue-600 text-white font-semibold">
+                        <th class="p-3.5 rounded-l-lg">Nhân viên</th>
+                        <th class="p-3.5">Từ ngày</th>
+                        <th class="p-3.5">Đến ngày</th>
+                        <th class="p-3.5">Lý do nghỉ</th>
+                        <th class="p-3.5">Trạng thái</th>
+                        <th class="p-3.5 rounded-r-lg text-center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    {% for l in leaves %}
+                    <tr class="hover:bg-gray-50/80 transition">
+                        <td class="p-3.5 font-bold text-gray-800 text-sm">{{ l.emp_name }}</td>
+                        <td class="p-3.5 font-mono text-gray-600">{{ l.start_date }}</td>
+                        <td class="p-3.5 font-mono text-gray-600">{{ l.end_date }}</td>
+                        <td class="p-3.5 font-semibold text-gray-700">{{ l.reason }}</td>
+                        <td class="p-3.5">
+                            {% if l.status == 'Đã duyệt' %}
+                                <span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-bold text-[11px]">Đã duyệt</span>
+                            {% elif l.status == 'Từ chối' %}
+                                <span class="bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full font-bold text-[11px]">Từ chối</span>
+                            {% else %}
+                                <span class="bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full font-bold text-[11px]">Chờ duyệt</span>
+                            {% endif %}
+                        </td>
+                        <td class="p-3.5 text-center flex items-center justify-center gap-1.5">
+                            <!-- Nút Duyệt thủ công -->
+                            <a href="{{ url_for('update_leave_status', index=loop.index0, status='approved') }}"
+                               class="bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-2.5 py-1.5 rounded-lg font-semibold transition flex items-center gap-1"
+                               title="Duyệt đơn">
+                                <i class="fa-solid fa-check"></i> Duyệt
+                            </a>
+
+                            <!-- Nút Từ chối / Hủy thủ công -->
+                            <a href="{{ url_for('update_leave_status', index=loop.index0, status='rejected') }}"
+                               class="bg-amber-50 text-amber-600 hover:bg-amber-100 px-2.5 py-1.5 rounded-lg font-semibold transition flex items-center gap-1"
+                               title="Từ chối đơn">
+                                <i class="fa-solid fa-ban"></i> Từ chối
+                            </a>
+
+                            <!-- Nút Xóa đơn -->
+                            <a href="{{ url_for('delete_leave', index=loop.index0) }}"
+                               onclick="return confirm('Bạn có muốn xóa đơn này không?')"
+                               class="bg-red-50 text-red-600 hover:bg-red-100 px-2.5 py-1.5 rounded-lg font-semibold transition flex items-center gap-1"
+                               title="Xóa đơn">
+                                <i class="fa-solid fa-trash-can"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="p-8 text-center text-gray-400">Chưa có đơn xin nghỉ nào được gửi.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
