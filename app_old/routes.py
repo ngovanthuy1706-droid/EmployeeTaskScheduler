@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from app import db
-from app.models import Employee, Task, Assignment
+from app_old import db
+from app_old.models import Employee, Task, Assignment
 from datetime import datetime, timedelta
 
 main_bp = Blueprint('main', __name__)

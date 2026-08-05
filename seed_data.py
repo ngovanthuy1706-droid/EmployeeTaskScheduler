@@ -1,5 +1,5 @@
-from app import create_app, db
-from app.models import Employee, Task, Assignment
+from app_old import create_app, db
+from app_old.models import Employee, Task, Assignment
 
 app = create_app()
 

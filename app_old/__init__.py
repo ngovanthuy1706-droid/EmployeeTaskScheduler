@@ -10,7 +10,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
 
-    from app.routes import main_bp
+    from app_old.routes import main_bp
     app.register_blueprint(main_bp)
 
     with app.app_context():

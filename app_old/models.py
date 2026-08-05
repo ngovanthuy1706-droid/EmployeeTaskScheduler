@@ -1,4 +1,4 @@
-from app import db
+from app_old import db
 from datetime import datetime
 
 class Employee(db.Model):
